@@ -1,101 +1,180 @@
+'use client'
 import Image from "next/image";
+import { useState } from "react";
 
 export default function Home() {
-  return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="https://nextjs.org/icons/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-semibold">
-              app/page.tsx
-            </code>
-            .
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
+  const photos = [
+    {
+      id: 0,
+      src: 'https://picsum.photos/id/237/536/354',
+      title: 'Sunset View',
+      description: 'A beautiful sunset over the mountains.',
+    },
+    {
+      id: 1,
+      src: 'https://picsum.photos/seed/picsum/536/354',
+      title: 'Sunset View',
+      description: 'A beautiful sunset over the mountains.',
+    },
+    {
+      id: 2,
+      src: 'https://picsum.photos/id/1084/536/354?grayscale',
+      title: 'Sunset View',
+      description: 'A beautiful sunset over the mountains.',
+    },
+    {
+      id: 3,
+      src: 'https://picsum.photos/id/1060/536/354?blur=2',
+      title: 'Sunset View',
+      description: 'A beautiful sunset over the mountains.',
+    },
+    {
+      id: 4,
+      src: 'https://picsum.photos/id/870/536/354?grayscale&blur=2',
+      title: 'Sunset View',
+      description: 'A beautiful sunset over the mountains.',
+    },
+    {
+      id: 0,
+      src: 'https://picsum.photos/id/237/536/354',
+      title: 'Sunset View',
+      description: 'A beautiful sunset over the mountains.',
+    },
+    {
+      id: 1,
+      src: 'https://picsum.photos/seed/picsum/536/354',
+      title: 'Sunset View',
+      description: 'A beautiful sunset over the mountains.',
+    },
+    {
+      id: 2,
+      src: 'https://picsum.photos/id/1084/536/354?grayscale',
+      title: 'Sunset View',
+      description: 'A beautiful sunset over the mountains.',
+    },
+    {
+      id: 3,
+      src: 'https://picsum.photos/id/1060/536/354?blur=2',
+      title: 'Sunset View',
+      description: 'A beautiful sunset over the mountains.',
+    },
+    {
+      id: 4,
+      src: 'https://picsum.photos/id/870/536/354?grayscale&blur=2',
+      title: 'Sunset View',
+      description: 'A beautiful sunset over the mountains.',
+    },
+    {
+      id: 0,
+      src: 'https://picsum.photos/id/237/536/354',
+      title: 'Sunset View',
+      description: 'A beautiful sunset over the mountains.',
+    },
+    {
+      id: 1,
+      src: 'https://picsum.photos/seed/picsum/536/354',
+      title: 'Sunset View',
+      description: 'A beautiful sunset over the mountains.',
+    },
+    {
+      id: 2,
+      src: 'https://picsum.photos/id/1084/536/354?grayscale',
+      title: 'Sunset View',
+      description: 'A beautiful sunset over the mountains.',
+    },
+    {
+      id: 3,
+      src: 'https://picsum.photos/id/1060/536/354?blur=2',
+      title: 'Sunset View',
+      description: 'A beautiful sunset over the mountains.',
+    },
+    {
+      id: 4,
+      src: 'https://picsum.photos/id/870/536/354?grayscale&blur=2',
+      title: 'Sunset View',
+      description: 'A beautiful sunset over the mountains.',
+    },
+    {
+      id: 0,
+      src: 'https://picsum.photos/id/237/536/354',
+      title: 'Sunset View',
+      description: 'A beautiful sunset over the mountains.',
+    },
+    {
+      id: 1,
+      src: 'https://picsum.photos/seed/picsum/536/354',
+      title: 'Sunset View',
+      description: 'A beautiful sunset over the mountains.',
+    },
+    {
+      id: 2,
+      src: 'https://picsum.photos/id/1084/536/354?grayscale',
+      title: 'Sunset View',
+      description: 'A beautiful sunset over the mountains.',
+    },
+    {
+      id: 3,
+      src: 'https://picsum.photos/id/1060/536/354?blur=2',
+      title: 'Sunset View',
+      description: 'A beautiful sunset over the mountains.',
+    },
+    {
+      id: 4,
+      src: 'https://picsum.photos/id/870/536/354?grayscale&blur=2',
+      title: 'Sunset View',
+      description: 'A beautiful sunset over the mountains.',
+    },
+  ];
+  const [select, setSelect] = useState('');
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="https://nextjs.org/icons/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:min-w-44"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+  return (
+    <div>
+      <div className="max-w-6xl mx-auto p-6">
+        <h1 className="text-3xl font-bold text-center mb-6">Everyone gets a pop!</h1>
+        <button onClick={()=>setSelect('open-popup')} className="mb-4 text-white bg-pink-700 hover:bg-pink-800 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center">Add new friends!</button>
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+          {photos.map((photo, index) => (
+            <div onClick={() => window.location.href = `/pop?id=${photo}`} key={index} className="relative overflow-hidden rounded-lg shadow-lg transition-transform transform hover:scale-105">
+              <img src={photo.src} alt={photo.title} className="w-full h-auto" />
+              <div className="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center text-white opacity-0 transition-opacity duration-300 hover:opacity-100">
+                <div className="text-center p-4">
+                  <h2 className="text-lg font-bold">{photo.title}</h2>
+                  <p>{photo.description}</p>
+                </div>
+              </div>
+            </div>
+          ))}
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
+      </div>
+      {select=='open-popup'?
+      <div className="popup-container w-full h-screen fixed top-0 left-0 flex justify-center items-center">
+        <div onClick={()=>setSelect('')} className="bg-blur bg-[#000] w-full h-screen fixed top-0 left-0 opacity-[0.7] z-[-2]"></div>
+        <div className="popup bg-[#fff] w-[350px] h-[500px] z-10 shadow-[5px_5px_0px_0px_rgba(246,36,89)] rotate-12 hover:rotate-0 transition-all p-4">
+
+
+          <form className="max-w-md mx-auto">
+          <div className="relative z-0 w-full mb-5 group">
+              <input name="title" className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:border-gray-600 dark:focus:border-pink-500 focus:outline-none focus:ring-0 focus:border-pink-600 peer" placeholder=" " required />
+              <label className="peer-focus:font-medium absolute text-sm duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto peer-focus:text-pink-600 peer-focus:dark:text-pink-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Title</label>
+            </div>
+            <div className="relative z-0 w-full mb-5 group">
+              <input name="desc" className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:border-gray-600 dark:focus:border-pink-500 focus:outline-none focus:ring-0 focus:border-pink-600 peer" placeholder=" " required />
+              <label className="peer-focus:font-medium absolute text-sm duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto peer-focus:text-pink-600 peer-focus:dark:text-pink-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Description</label>
+            </div>
+            <div className="relative z-0 w-full mb-5 group">
+              <input name="url1" className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:border-gray-600 dark:focus:border-pink-500 focus:outline-none focus:ring-0 focus:border-pink-600 peer" placeholder=" " required />
+              <label className="peer-focus:font-medium absolute text-sm duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto peer-focus:text-pink-600 peer-focus:dark:text-pink-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Original Image Address URL</label>
+            </div>
+            <div className="relative z-0 w-full mb-5 group">
+              <input name="url2" className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:border-gray-600 dark:focus:border-pink-500 focus:outline-none focus:ring-0 focus:border-pink-600 peer" placeholder=" " required />
+              <label className="peer-focus:font-medium absolute text-sm duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 peer-focus:text-pink-600 peer-focus:dark:text-pink-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Pop Image Address URL</label>
+            </div>
+            <button type="submit" className="mb-4 text-white bg-pink-700 hover:bg-pink-800 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center">Make it pop!</button>
+          </form>
+
+        </div>
+      </div>
+      :null}
     </div>
   );
 }
