@@ -1,0 +1,13 @@
+services:  
+  - type: web
+    name: ourpop
+    runtime: node
+    repo: https://github.com/ScriptBloxX/ourpop-indy
+    plan: free
+    envVars:
+    - key: BUN_VERSION
+      value: 1.1.0
+    region: Singapore
+    buildCommand: bun install
+    startCommand: bun start
+version: "1"
