@@ -11,16 +11,16 @@ export default function Page() {
   
   useEffect(() => {
     const getPopdata = async () => {
-      try {
-        const url = new URL(window.location.href);
-        const id = url.searchParams.get('id');
+      // try {
+      //   const url = new URL(window.location.href);
+      //   const id = url.searchParams.get('id');
 
-        const response = await axios.post(`https://ourpop-elysia-api.onrender.com/api/popdata/getbypost`, { id: id });
-        setData(response.data.data);
-        console.log(response.data.data, data);
-      } catch (error) {
-        console.error('Error fetching photos:', error);
-      }
+      //   const response = await axios.post(`https://ourpop-elysia-api.onrender.com/api/popdata/getbypost`, { id: id });
+      //   setData(response.data.data);
+      //   console.log(response.data.data, data);
+      // } catch (error) {
+      //   console.error('Error fetching photos:', error);
+      // }
     };
 
     getPopdata();
