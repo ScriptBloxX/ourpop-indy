@@ -89,7 +89,7 @@ export default function Page() {
 
   return (
     <>
-    {data?
+    {data[0]?
       <div 
         className="container flex justify-center items-center h-screen w-full p-8" 
         onMouseDown={handleMouseDown} 
@@ -99,13 +99,13 @@ export default function Page() {
         onTouchEnd={handleMouseUp} 
       >
         {isImg1Visible && (
-          <img className='img-1 w-full h-full object-cover' 
+          <img className='img-1 h-full object-cover' 
             src={data[0].url1} 
             alt="Image 1" 
           />
         )}
         {!isImg1Visible && (
-          <img className='img-2 w-full h-full object-cover' 
+          <img className='img-2e h-full object-cover' 
           src={data[0].url2}
             alt="Image 2" 
           />
