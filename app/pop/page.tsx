@@ -2,12 +2,18 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 
+interface DataItem {
+  id: number;
+  url1: string;
+  url2: string;
+}
+
 export default function Page() {
   const [isImg1Visible, setIsImg1Visible] = useState(true);
   const [clickCountLabal, setClickCountLabal] = useState(0);
   const [clickCount, setClickCount] = useState(0);
   const [swing, setSwing] = useState(false);
-  const [data, setData] = useState({});
+  const [data, setData] = useState<DataItem[]>([]);
   
   useEffect(() => {
     const getPopdata = async () => {
@@ -21,6 +27,16 @@ export default function Page() {
       // } catch (error) {
       //   console.error('Error fetching photos:', error);
       // }
+      try {
+        const url = new URL(window.location.href);
+        const id = url.searchParams.get('id');
+
+        const response = await axios.get(`https://ourpop-elysia-api.onrender.com/api/popdata/`);
+        setData(response.data.data.filter((t: any) => t.id === id));
+        console.log(response.data.data.filter((t: any) => t.id === id));
+      } catch (error) {
+        console.error('Error fetching photos:', error);
+      }
     };
 
     getPopdata();
@@ -72,29 +88,33 @@ export default function Page() {
   };
 
   return (
-    <div 
-      className="container flex justify-center items-center h-screen w-full p-8" 
-      onMouseDown={handleMouseDown} 
-      onMouseUp={handleMouseUp}
-      onMouseLeave={handleMouseUp} 
-      onTouchStart={handleMouseDown} 
-      onTouchEnd={handleMouseUp} 
-    >
-      {isImg1Visible && (
-        <img className='img-1 w-full h-full object-cover' 
-          src='https://i.natgeofe.com/n/548467d8-c5f1-4551-9f58-6817a8d2c45e/NationalGeographic_2572187_square.jpg' 
-          alt="Image 1" 
-        />
-      )}
-      {!isImg1Visible && (
-        <img className='img-2 w-full h-full object-cover' 
-          src='https://cdn.britannica.com/70/234870-050-D4D024BB/Orange-colored-cat-yawns-displaying-teeth.jpg' 
-          alt="Image 2" 
-        />
-      )}
-      <div className={`click-label ${swing ? 'swing' : ''} bg-pink-700 px-4 rounded-sm`}>
-        {clickCountLabal} Clicks
+    <>
+    {data?
+      <div 
+        className="container flex justify-center items-center h-screen w-full p-8" 
+        onMouseDown={handleMouseDown} 
+        onMouseUp={handleMouseUp}
+        onMouseLeave={handleMouseUp} 
+        onTouchStart={handleMouseDown} 
+        onTouchEnd={handleMouseUp} 
+      >
+        {isImg1Visible && (
+          <img className='img-1 w-full h-full object-cover' 
+            src={data[0].url1} 
+            alt="Image 1" 
+          />
+        )}
+        {!isImg1Visible && (
+          <img className='img-2 w-full h-full object-cover' 
+          src={data[0].url2}
+            alt="Image 2" 
+          />
+        )}
+        <div className={`click-label ${swing ? 'swing' : ''} bg-pink-700 px-4 rounded-sm`}>
+          {clickCountLabal} Clicks
+        </div>
       </div>
-    </div>
+  : <h2>Loading... / Try refresh if u think something wonrg</h2> }
+    </>
   );
 }
