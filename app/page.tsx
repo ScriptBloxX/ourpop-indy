@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import axios from 'axios';
 
 export default function Home() {
-  const [photos, setPhotos] = useState<{ id: number; url1: string; title: string; desc: string; }[]>([]);
+  const [photos, setPhotos] = useState<{ id: number; url1: string; title: string; desc: string; total: number}[]>([]);
   const [select, setSelect] = useState('');
   const [loading,setLoading] = useState(true);
 
@@ -70,6 +70,7 @@ export default function Home() {
                     <p>{photo.desc}</p>
                   </div>
                 </div>
+                <h3 className="absolute bottom-4 left-4 bg-pink-700 text-white px-2 rounded-lg">😍 {photo.total}</h3>
               </div>
             ))}
           </div>
