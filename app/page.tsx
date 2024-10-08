@@ -56,13 +56,13 @@ export default function Home() {
         <h2 className="text-4xl">Server is walking...</h2>
       </div>
       :
-      <div className="max-w-6xl mx-auto p-6">
+      <div className="mx-auto p-6">
         <h1 className="text-3xl font-bold text-center mb-6">Everyone gets a pop!</h1>
         <button onClick={() => setSelect('open-popup')} className="mb-4 text-white bg-pink-700 hover:bg-pink-800 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center">Add new friends!</button>
         {photos.length ? (
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
             {photos.map((photo, index) => (
-              <div onClick={() => window.location.href = `/pop?id=${photo.id}`} key={index} className="relative overflow-hidden rounded-lg shadow-lg transition-transform transform hover:scale-105">
+              <div onClick={() => window.location.href = `/pop?id=${photo.id}`} key={index} className="relative overflow-hidden rounded-lg shadow-lg transition-transform transform hover:scale-105 h-max max-h-[500px]">
                 <img src={photo.url1} alt={photo.title} className="w-full h-auto" />
                 <div className="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center text-white opacity-0 transition-opacity duration-300 hover:opacity-100">
                   <div className="text-center p-4">
