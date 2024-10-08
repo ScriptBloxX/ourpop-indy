@@ -90,7 +90,7 @@ export default function Page() {
     <>
       {data ?
         <div
-          className="container flex justify-center items-center h-screen w-full p-8"
+          className="pop-container flex justify-center items-center h-screen w-full p-8"
           onMouseDown={handleMouseDown}
           onMouseUp={handleMouseUp}
           onMouseLeave={handleMouseUp}
