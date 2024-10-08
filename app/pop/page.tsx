@@ -1,14 +1,35 @@
 'use client';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';
 
 export default function Page() {
   const [isImg1Visible, setIsImg1Visible] = useState(true);
+  const [clickCountLabal, setClickCountLabal] = useState(0);
   const [clickCount, setClickCount] = useState(0);
   const [swing, setSwing] = useState(false);
+  const [data, setData] = useState({});
+  
+  useEffect(() => {
+    const getPopdata = async () => {
+      try {
+        const url = new URL(window.location.href);
+        const id = url.searchParams.get('id');
+
+        const response = await axios.post(`https://ourpop-elysia-api.onrender.com/api/popdata/getbypost`, { id: id });
+        setData(response.data.data);
+        console.log(response.data.data, data);
+      } catch (error) {
+        console.error('Error fetching photos:', error);
+      }
+    };
+
+    getPopdata();
+  }, []);
 
   const handleMouseDown = () => {
     setIsImg1Visible(false);
     updateClickCount();
+    updateClickCountLabal();
   };
 
   const handleMouseUp = () => {
@@ -16,9 +37,38 @@ export default function Page() {
   };
 
   const updateClickCount = () => {
-    setClickCount((prevCount) => prevCount + 1);
+    setClickCount((prevCount) => {
+      const newCount = prevCount + 1;
+      if (newCount % 15 === 0) {
+        postPopData(newCount);
+        setClickCount(0);
+      }
+      return newCount;
+    });
+  };
+  const updateClickCountLabal = () => {
+    setClickCountLabal((prevCount) => {
+      const newCount = prevCount + 1;
+      return newCount;
+    });
     setSwing(true);
     setTimeout(() => setSwing(false), 200);
+  };
+
+
+  const postPopData = async (popTimes:any) => {
+    try {
+      const url = new URL(window.location.href);
+      const id = url.searchParams.get('id');
+
+      await axios.post('https://ourpop-elysia-api.onrender.com/api/pop/pop', {
+        id: id,
+        poptimes: popTimes
+      });
+      console.log(`Posted: ${popTimes} clicks for ID: ${id}`);
+    } catch (error) {
+      console.error('Error posting pop data:', error);
+    }
   };
 
   return (
@@ -43,7 +93,7 @@ export default function Page() {
         />
       )}
       <div className={`click-label ${swing ? 'swing' : ''} bg-pink-700 px-4 rounded-sm`}>
-        {clickCount} Clicks
+        {clickCountLabal} Clicks
       </div>
     </div>
   );
