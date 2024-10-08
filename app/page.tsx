@@ -5,6 +5,7 @@ import axios from 'axios';
 export default function Home() {
   const [photos, setPhotos] = useState<{ id: number; url1: string; title: string; description: string; }[]>([]);
   const [select, setSelect] = useState('');
+  const [loading,setLoading] = useState(true);
 
   useEffect(() => {
     const fetchPhotos = async () => {
@@ -13,8 +14,10 @@ export default function Home() {
         setPhotos(response.data.data);
       } catch (error) {
         console.error('Error fetching photos:', error);
+      } finally{
+        setLoading(false);
       }
-    };
+    }
 
     fetchPhotos();
   }, []);
@@ -47,6 +50,12 @@ export default function Home() {
 
   return (
     <div>
+      {loading?
+      <div className="loading-screen w-full h-screen fixed z-20 bg-[#fff] flex justify-center items-center flex-col">
+        <img src='https://cdn.dribbble.com/users/1284666/screenshots/6321168/__3.gif'></img>
+        <h2 className="text-4xl">Server is walking...</h2>
+      </div>
+      :
       <div className="max-w-6xl mx-auto p-6">
         <h1 className="text-3xl font-bold text-center mb-6">Everyone gets a pop!</h1>
         <button onClick={() => setSelect('open-popup')} className="mb-4 text-white bg-pink-700 hover:bg-pink-800 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center">Add new friends!</button>
@@ -65,7 +74,7 @@ export default function Home() {
             ))}
           </div>
         ) : null}
-      </div>
+      </div>}
       {select === 'open-popup' ? (
         <div className="popup-container w-full h-screen fixed top-0 left-0 flex justify-center items-center">
           <div onClick={() => setSelect('')} className="bg-blur bg-[#000] w-full h-screen fixed top-0 left-0 opacity-[0.7] z-[-2]"></div>

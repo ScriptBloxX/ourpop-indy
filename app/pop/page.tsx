@@ -13,27 +13,17 @@ export default function Page() {
   const [clickCountLabal, setClickCountLabal] = useState(0);
   const [clickCount, setClickCount] = useState(0);
   const [swing, setSwing] = useState(false);
-  const [data, setData] = useState<DataItem[]>([]);
-  
+  const [data, setData] = useState<DataItem>();
+
   useEffect(() => {
     const getPopdata = async () => {
-      // try {
-      //   const url = new URL(window.location.href);
-      //   const id = url.searchParams.get('id');
-
-      //   const response = await axios.post(`https://ourpop-elysia-api.onrender.com/api/popdata/getbypost`, { id: id });
-      //   setData(response.data.data);
-      //   console.log(response.data.data, data);
-      // } catch (error) {
-      //   console.error('Error fetching photos:', error);
-      // }
       try {
         const url = new URL(window.location.href);
         const id = url.searchParams.get('id');
 
-        const response = await axios.get(`https://ourpop-elysia-api.onrender.com/api/popdata/`);
-        setData(response.data.data.filter((t: any) => t.id === id));
-        console.log(response.data.data.filter((t: any) => t.id === id));
+        const response = await axios.get(`https://ourpop-elysia-api.onrender.com/api/popdata/${id}`);
+        setData(response.data.data);
+        setClickCountLabal(response.data.data.total)
       } catch (error) {
         console.error('Error fetching photos:', error);
       }
@@ -72,12 +62,12 @@ export default function Page() {
   };
 
 
-  const postPopData = async (popTimes:any) => {
+  const postPopData = async (popTimes: any) => {
     try {
       const url = new URL(window.location.href);
       const id = url.searchParams.get('id');
 
-      await axios.post('https://ourpop-elysia-api.onrender.com/api/pop/pop', {
+      await axios.post('https://ourpop-elysia-api.onrender.com/api/pop/', {
         id: id,
         poptimes: popTimes
       });
@@ -89,32 +79,36 @@ export default function Page() {
 
   return (
     <>
-    {data[0]?
-      <div 
-        className="container flex justify-center items-center h-screen w-full p-8" 
-        onMouseDown={handleMouseDown} 
-        onMouseUp={handleMouseUp}
-        onMouseLeave={handleMouseUp} 
-        onTouchStart={handleMouseDown} 
-        onTouchEnd={handleMouseUp} 
-      >
-        {isImg1Visible && (
-          <img className='img-1 h-full object-cover' 
-            src={data[0].url1} 
-            alt="Image 1" 
-          />
-        )}
-        {!isImg1Visible && (
-          <img className='img-2e h-full object-cover' 
-          src={data[0].url2}
-            alt="Image 2" 
-          />
-        )}
-        <div className={`click-label ${swing ? 'swing' : ''} bg-pink-700 px-4 rounded-sm`}>
-          {clickCountLabal} Clicks
+      {data ?
+        <div
+          className="container flex justify-center items-center h-screen w-full p-8"
+          onMouseDown={handleMouseDown}
+          onMouseUp={handleMouseUp}
+          onMouseLeave={handleMouseUp}
+          onTouchStart={handleMouseDown}
+          onTouchEnd={handleMouseUp}
+        >
+          {isImg1Visible && (
+            <img className='img-1 h-full object-cover'
+              src={data.url1}
+              alt="Image 1"
+            />
+          )}
+          {!isImg1Visible && (
+            <img className='img-2e h-full object-cover'
+              src={data.url2}
+              alt="Image 2"
+            />
+          )}
+          <div className={`click-label ${swing ? 'swing' : ''} bg-pink-700 px-4 rounded-sm`}>
+            {clickCountLabal} Clicks
+          </div>
         </div>
-      </div>
-  : <h2>Loading... / Try refresh if u think something wonrg</h2> }
+        :
+        <div className="loading-screen w-full h-screen fixed z-20 bg-[#fff] flex justify-center items-center flex-col">
+          <img src='https://cdn.dribbble.com/users/1284666/screenshots/6321168/__3.gif'></img>
+          <h2 className="text-4xl">Server is walking...</h2>
+        </div>}
     </>
   );
 }
