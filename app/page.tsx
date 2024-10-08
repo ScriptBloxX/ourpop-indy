@@ -1,6 +1,7 @@
 'use client'
 import { useEffect, useState } from "react";
 import axios from 'axios';
+import FA from "f-analytics";
 
 export default function Home() {
   const [photos, setPhotos] = useState<{ id: number; url1: string; title: string; desc: string; total: number}[]>([]);
@@ -18,7 +19,7 @@ export default function Home() {
         setLoading(false);
       }
     }
-
+    FA("d39ecc10-9fad-440f-ae4d-743091551afa");
     fetchPhotos();
   }, []);
 
