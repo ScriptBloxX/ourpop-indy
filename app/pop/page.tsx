@@ -32,6 +32,16 @@ export default function Page() {
     getPopdata();
   }, []);
 
+  useEffect(() => {
+    const intervalId = setInterval(() => {
+      if (clickCount > 0) {
+        postPopData(clickCount);
+        setClickCount(0);
+      }
+    }, 4500);
+    return () => clearInterval(intervalId);
+  }, [clickCount]);
+  
   const handleMouseDown = () => {
     setIsImg1Visible(false);
     updateClickCount();
@@ -71,7 +81,6 @@ export default function Page() {
         id: id ? parseInt(id) : null,
         poptimes: popTimes
       });
-      console.log(`Posted: ${popTimes} clicks for ID: ${id}`);
     } catch (error) {
       console.error('Error posting pop data:', error);
     }
