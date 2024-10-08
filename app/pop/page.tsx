@@ -68,7 +68,7 @@ export default function Page() {
       const id = url.searchParams.get('id');
 
       await axios.post('https://ourpop-elysia-api.onrender.com/api/pop/', {
-        id: id,
+        id: id ? parseInt(id) : null,
         poptimes: popTimes
       });
       console.log(`Posted: ${popTimes} clicks for ID: ${id}`);
