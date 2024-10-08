@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import axios from 'axios';
 
 export default function Home() {
-  const [photos, setPhotos] = useState<{ id: number; url1: string; title: string; description: string; }[]>([]);
+  const [photos, setPhotos] = useState<{ id: number; url1: string; title: string; desc: string; }[]>([]);
   const [select, setSelect] = useState('');
   const [loading,setLoading] = useState(true);
 
@@ -67,7 +67,7 @@ export default function Home() {
                 <div className="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center text-white opacity-0 transition-opacity duration-300 hover:opacity-100">
                   <div className="text-center p-4">
                     <h2 className="text-lg font-bold">{photo.title}</h2>
-                    <p>{photo.description}</p>
+                    <p>{photo.desc}</p>
                   </div>
                 </div>
               </div>
