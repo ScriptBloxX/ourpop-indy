@@ -38,7 +38,7 @@ export default function Page() {
         postPopData(clickCount);
         setClickCount(0);
       }
-    }, 4500);
+    }, 1500);
     return () => clearInterval(intervalId);
   }, [clickCount]);
   
