@@ -36,9 +36,8 @@ export default function Page() {
     const intervalId = setInterval(() => {
       if (clickCount > 0) {
         postPopData(clickCount);
-        setClickCount(0);
       }
-    }, 100);
+    }, 250);
     return () => clearInterval(intervalId);
   }, [clickCount]);
   
@@ -57,7 +56,6 @@ export default function Page() {
       const newCount = prevCount + 1;
       if (newCount % 15 === 0) {
         postPopData(newCount);
-        setClickCount(0);
       }
       return newCount;
     });
@@ -73,17 +71,18 @@ export default function Page() {
 
 
   const postPopData = async (popTimes: any) => {
-    try {
       const url = new URL(window.location.href);
       const id = url.searchParams.get('id');
 
       await axios.post('https://ourpop-elysia-api.onrender.com/api/pop/', {
         id: id ? parseInt(id) : null,
         poptimes: popTimes
-      });
-    } catch (error) {
-      console.error('Error posting pop data:', error);
-    }
+      }).then(()=>{
+        setClickCount(0);
+      }).catch((error)=>{
+        console.error('Error posting pop data:', error);
+      })
+
   };
 
   return (
