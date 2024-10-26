@@ -37,7 +37,7 @@ export default function Page() {
       if (clickCount > 0) {
         postPopData(clickCount);
       }
-    }, 250);
+    }, 1);
     return () => clearInterval(intervalId);
   }, [clickCount]);
   
@@ -66,7 +66,7 @@ export default function Page() {
       return newCount;
     });
     setSwing(true);
-    setTimeout(() => setSwing(false), 200);
+    setTimeout(() => setSwing(false), 1);
   };
 
 
